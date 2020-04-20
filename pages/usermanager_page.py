@@ -36,7 +36,7 @@ class UserPage(BasePage):
 
     """ 添加用户窗口下控件 """
     cluster_select = (By.XPATH, '//div[@title="cluster1"]')
-    # 所有输入框
+    # 所有输入框 0 用户名称，1 真实姓名，2 电话，3 手机号，4 证件号，5 邮箱
     input = (By.XPATH, '//div[@class="col-sm-9"]/input')
     sex_radio = (By.XPATH, '//input[@type="radio"]')
 
@@ -80,6 +80,18 @@ class UserPage(BasePage):
         :return:
         """
         self.driver.find_elements(*self.sex_radio)[index].click()
+
+    def input_telephone(self, telephone):
+        """ 在添加用户窗口中输入电话 """
+        self.driver.find_elements(*self.input)[2].send_keys(telephone)
+
+    def input_phonenum(self, phonenum):
+        """ 在添加用户窗口中输入手机号 """
+        self.driver.find_elements(*self.input)[3].send_keys(phonenum)
+
+    def input_idnumber(self, idnumber):
+        """ 在添加用户窗口中输入证件号 """
+        self.driver.find_elements(*self.input)[4].send_keys(idnumber)
 
 
 if __name__ == '__main__':
