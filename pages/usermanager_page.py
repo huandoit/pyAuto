@@ -39,6 +39,8 @@ class UserPage(BasePage):
     # 所有输入框 0 用户名称，1 真实姓名，2 电话，3 手机号，4 证件号，5 邮箱
     input = (By.XPATH, '//div[@class="col-sm-9"]/input')
     sex_radio = (By.XPATH, '//input[@type="radio"]')
+    confirm_btn = (By.XPATH, '//div[@class="ant-modal-footer"]/div/button[2]')
+    cancel_btn = (By.XPATH, '//div[@class="ant-modal-footer"]/div/button[1]')
 
     def user_page(self, url):
         """ 进入用户管理页面 """
@@ -92,6 +94,10 @@ class UserPage(BasePage):
     def input_idnumber(self, idnumber):
         """ 在添加用户窗口中输入证件号 """
         self.driver.find_elements(*self.input)[4].send_keys(idnumber)
+
+    def clcik_confirm(self):
+        """ 在添加用户窗口点击确定按钮 """
+        self.driver.find_element(*self.confirm_btn).click()
 
 
 if __name__ == '__main__':
