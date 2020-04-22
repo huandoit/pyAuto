@@ -17,11 +17,16 @@ class TestLogin(object):
 
     def setup_class(self):
         """ 在所有用例执行前初始化浏览器"""
-        login = LoginPage()
-        login.open('http://172.18.1.187/#/login')
+        self.login = LoginPage()
+        self.login.open('http://172.18.1.187/#/login')
 
     def teardown(self):
         """ 每个登录测试执行后执行登出操作 """
+        self.login.logout()
 
     def test_correct_username_password(self):
-        pass
+        """ 正确的用户名和密码 """
+        self.login.input_username('root')
+        self.login.input_password('111111')
+        self.login.clcik_submit()
+        assert self.login.get_username() == 'root'

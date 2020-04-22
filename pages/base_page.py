@@ -45,12 +45,17 @@ class BasePage(object):
 
     def logout(self):
         """ 统一登出 """
-        root_btn = (By.XPATH, '//*[@id="ant-header"]/ul/li[2]/a')
-        logout_btn = (By.XPATH, '//*[@id="ant-header"]/ul/li[2]/div/div/div/ul/li[4]')
+        root_btn = (By.XPATH, '//div[@id="ant-header"]/ul/li[2]/a')
+        logout_btn = (By.XPATH, '//div[@id="ant-header"]/ul/li[2]/div/div/div/ul/li[4]')
+        confirm_btn = (By.XPATH, '//div[@class="ant-modal-footer"]/div/button[2]')
         self.driver.find_element(*root_btn).click()
+        time.sleep(2)
         self.driver.find_element(*logout_btn).click()
+        time.sleep(2)
+        self.driver.find_element(*confirm_btn).click()
 
 
 if __name__ == '__main__':
     base_page = BasePage()
     base_page.login('root', '111111')
+    base_page.logout()
