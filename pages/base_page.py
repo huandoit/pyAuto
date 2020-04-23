@@ -32,6 +32,9 @@ class BasePage(object):
         """ 重写查找多个元素 """
         return self.driver.find_elements(*selector)
 
+    def clear(self, selector):
+        self.find_element(*selector).clear()
+
     def login(self, username, password):
         """ 统一登录 """
         input_username = (By.XPATH, '//*[@id="root"]/div/div[4]/div[3]/form/div[2]/div/input')
@@ -53,6 +56,7 @@ class BasePage(object):
         self.driver.find_element(*logout_btn).click()
         time.sleep(2)
         self.driver.find_element(*confirm_btn).click()
+        time.sleep(5)
 
 
 if __name__ == '__main__':

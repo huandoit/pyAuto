@@ -27,6 +27,7 @@ class LoginPage(BasePage):
     username_input = (By.XPATH, '//input[@placeholder="用户名"]')
     password_input = (By.XPATH, '//input[@placeholder="密码"]')
     submit_btn = (By.XPATH, '//button[@type="submit"]')
+    error_msg = (By.XPATH, '//div[@id="root"]/div/div[1]/span[2]')
 
     """ 登录后首页控件 """
     root_btn = (By.XPATH, '//div[@id="ant-header"]/ul/li[2]/a')
@@ -59,11 +60,17 @@ class LoginPage(BasePage):
         username_text = self.driver.find_element(*self.root_btn).text
         return username_text
 
+    def get_errorinfo(self):
+        """ 登录失败获取错误提示信息 """
+        msg = self.driver.find_element(*self.error_msg).text
+        return msg
+
 
 if __name__ == '__main__':
     login = LoginPage()
     login.login_page('http://172.18.1.187/#/login')
     login.input_username('root')
-    login.input_password('111111')
+    login.input_password('222222')
     login.clcik_submit()
-    print(login.get_username())
+    # print(login.get_username())
+    print(login.get_errorinfo())
